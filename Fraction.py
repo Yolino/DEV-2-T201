@@ -191,7 +191,7 @@ class Fraction:
 def test():
 
     f1 = Fraction(4, 2)
-    f2 = Fraction(1, 3)
+    f2 = Fraction(7, 3)
     print(f1)
     print(f2.as_mixed_number())
     print(f1.__add__(f2))
