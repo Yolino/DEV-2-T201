@@ -185,5 +185,26 @@ class Fraction:
         """
         num = self.numerator * other.denominator - other.numerator * self.denominator
         den = self.denominator * other.denominator
-        difference = Fraction(num, den)
+        difference = Fraction(abs(num), den)
         return difference.numerator == 1 and difference.denominator != 0
+
+def test():
+
+    f1 = Fraction(4, 2)
+    f2 = Fraction(1, 3)
+    print(f1)
+    print(f2.as_mixed_number())
+    print(f1.__add__(f2))
+    print(f1.__sub__(f2))
+    print(f1.__mul__(f2))
+    print(f1.__truediv__(f2))
+    print(f1.__pow__(2))
+    print(f1.__eq__(f2))
+    print(f1.__float__())
+    print(f1.is_zero())
+    print(f1.is_integer())
+    print(f1.is_proper())
+    print(f1.is_unit())
+    print(f1.is_adjacent_to(f2))
+
+#test()
