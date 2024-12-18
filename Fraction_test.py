@@ -9,6 +9,13 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(result.numerator, 4)
         self.assertEqual(result.denominator, 7)
 
+        f2 = Fraction(0, 5)
+        self.assertEqual(f2.numerator, 0)
+        self.assertEqual(f2.denominator, 1)
+
+        with self.assertRaises(ValueError):
+            Fraction(1, 0)
+
     def test_str(self):
         f1 = Fraction(1, 2)
         self.assertEqual(str(f1), "1/2")
@@ -23,19 +30,39 @@ class MyTestCase(unittest.TestCase):
         f6 = Fraction(-1, -3)
         self.assertEqual(str(f6), "1/3")
 
+    def test_as_mixed_number(self):
+        f1 = Fraction(7, 3)
+        self.assertEqual(f1.as_mixed_number(), "2 1/3")
+        f2 = Fraction(3, 1)
+        self.assertEqual(f2.as_mixed_number(), "3")
+        f3 = Fraction(1, 3)
+        self.assertEqual(f3.as_mixed_number(), "1/3")
+        f4 = Fraction(-7, 3)
+        self.assertEqual(f4.as_mixed_number(), "-3 2/3")
+
     def test_add(self):
         f1 = Fraction(9, 3)
         f2 = Fraction(-1, 3)
         result = f1.__add__(f2)
         self.assertEqual(result.numerator, 8)
         self.assertEqual(result.denominator, 3)
+        f3 = Fraction(1, 5)
+        f4 = Fraction(1, 6)
+        result2 = f3.__add__(f4)
+        self.assertEqual(result2.numerator, 11)
+        self.assertEqual(result2.denominator, 30)
 
     def test_truediv(self):
         f1 = Fraction(9, 3)
-        f2 = Fraction(1,3)
+        f2 = Fraction(1, 3)
         result = f1.__truediv__(f2)
         self.assertEqual(result.numerator, 9)
         self.assertEqual(result.denominator, 1)
+
+        f3 = Fraction(1, 2)
+        f4 = Fraction(0, 1)
+        with self.assertRaises(ZeroDivisionError):
+            f3 / f4
 
     def test_eq(self):
         f1 = Fraction(8, 16)
@@ -58,10 +85,10 @@ class MyTestCase(unittest.TestCase):
     def test_proper(self):
         f1 = Fraction(1, 2)
         result = f1.is_proper()
-        self.assertEqual(result, True)
+        self.assertEqual(result, False)
         f2 = Fraction(2, 1)
         result2 = f2.is_proper()
-        self.assertEqual(result2, False)
+        self.assertEqual(result2, True)
 
     def test_adjacent_to(self):
         f1 = Fraction(2, 3)
